@@ -51,6 +51,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">당근마켓</a>
+        <span class="ms-auto mx-2" id="userName">유저이름</span>
         <button
           class="navbar-toggler"
           type="button"
@@ -163,9 +164,20 @@
       const db = firebase.firestore();
       const storage = firebase.storage();
 
-      $("#logout").click(function() {
-          firebase.auth().signOut();
-      })
+      var 뺀거 = localStorage.getItem("user");
+      $("#userName").html(JSON.parse(뺀거).displayName);
+
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          console.log(user);
+          localStorage.setItem("user", JSON.stringify(user));
+        }
+      });
+
+      $("#logout").click(function () {
+        firebase.auth().signOut();
+        localStorage.removeItem("user");
+      });
 
       $("#login").click(function () {
         var 이메일 = $("#email").val();
