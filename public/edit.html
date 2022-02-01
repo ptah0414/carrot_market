@@ -129,6 +129,25 @@
       const db = firebase.firestore();
       const storage = firebase.storage();
 
+      var 쿼리스트링 = new URLSearchParams(window.location.search);
+      쿼리스트링.get("id");
+
+      db.collection("product").doc(쿼리스트링.get("id")).get().then((result)=>{
+        console.log(result.data());
+        $("#title").val(result.data().제목);
+        $("#content").val(result.data().내용);
+      });
+
+      $("#send").click(function() {
+          var 바꿀거= {
+            제목: $("#title").val(),
+            가격: $("#price").val()
+        }
+
+        db.collection("product").doc(쿼리스트링.get("id")).update(바꿀거);
+      })
+
+
     </script>
   </body>
 </html>
