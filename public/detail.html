@@ -112,12 +112,14 @@
     <div class="container">
       상세페이지임
       <button id="edit">수정</button>
+      <button id="edit">채팅</button>
+
       <div
         class="detail-pic my-4"
         style="background-image: url('https://placeimg.com/640/380/tech')"
       ></div>
       <div>
-        <h5>올린사람 : 모름</h5>
+        <h5 class="author">올린사람 : 모름</h5>
         <hr />
         <h5 class="title">상품명</h5>
         <p class="date">올린날짜</p>
@@ -135,7 +137,7 @@
         .doc(쿼리스트링.get("id"))
         .get()
         .then((result) => {
-          console.log(result.data());
+          $(".author").html("올린사람: " + result.data().이름); 
           $(".title").html(result.data().제목);
           $(".price").html(result.data().가격);
           $(".detail-pic").css(
