@@ -12,44 +12,8 @@
       crossorigin="anonymous"
     />
     <link href="main.css" rel="stylesheet" />
-
-    
   </head>
-
   <body>
-    <script src="/__/firebase/9.6.5/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script src="/__/firebase/9.6.5/firebase-auth-compat.js"></script>
-    <script src="/__/firebase/9.6.5/firebase-firestore-compat.js"></script>
-    <script src="/__/firebase/9.6.5/firebase-storage-compat.js"></script>
-
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-      crossorigin="anonymous"
-    ></script>
-
-    <script
-      src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-      crossorigin="anonymous"
-    ></script>
-
-    <script>
-      // Your web app's Firebase configuration
-      const firebaseConfig = {
-        apiKey: "AIzaSyDnklf6ll_EhlrwjDLwfOuJGwxDKJ0MMas",
-        authDomain: "hahaha-67fdb.firebaseapp.com",
-        projectId: "hahaha-67fdb",
-        storageBucket: "hahaha-67fdb.appspot.com",
-        messagingSenderId: "544760195348",
-        appId: "1:544760195348:web:4eea71474b4762e44bfa01",
-      };
-
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-    </script>
-
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">당근마켓</a>
@@ -111,38 +75,60 @@
       </div>
     </nav>
 
-    <div class="container">
-      상세페이지임
-      <button id="edit">수정</button>
-      <div
-        class="detail-pic my-4" 
-        style="background-image: url('https://placeimg.com/640/380/tech')"
-      ></div>
-      <div>
-        <h5>올린사람 : 모름</h5>
-        <hr />
-        <h5 class="title">상품명</h5>
-        <p class="date">올린날짜</p>
-        <p class="price">가격</p>
-      </div>
+    <div class="container mt-3">
+      <input
+        type="text"
+        class="form-control mt-2"
+        id="title"
+        placeholder="title"
+      />
+      <textarea class="form-control mt-2" id="content">content</textarea>
+      <input
+        type="text"
+        class="form-control mt-2"
+        id="price"
+        placeholder="price"
+      />
+      <button class="btn btn-danger mt-3" id="send">올리기</button>
     </div>
- 
+
+    <script src="/__/firebase/9.6.5/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script src="/__/firebase/9.6.5/firebase-auth-compat.js"></script>
+    <script src="/__/firebase/9.6.5/firebase-firestore-compat.js"></script>
+    <script src="/__/firebase/9.6.5/firebase-storage-compat.js"></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyDnklf6ll_EhlrwjDLwfOuJGwxDKJ0MMas",
+        authDomain: "hahaha-67fdb.firebaseapp.com",
+        projectId: "hahaha-67fdb",
+        storageBucket: "hahaha-67fdb.appspot.com",
+        messagingSenderId: "544760195348",
+        appId: "1:544760195348:web:4eea71474b4762e44bfa01",
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+
     <script>
       const db = firebase.firestore();
       const storage = firebase.storage();
 
-      var 쿼리스트링 = new URLSearchParams(window.location.search); // 쿼리스트링을 오브젝트로 변환
-
-      db.collection("product").doc(쿼리스트링.get("id")).get().then((result)=>{
-          console.log(result.data());
-          $(".title").html(result.data().제목);
-          $(".price").html(result.data().가격);
-          $(".detail-pic").css("background-image", `url(${result.data().이미지})`);
-      });
-
-      $("#edit").click(function() {
-          window.location.href = "/edit/html?=" + 쿼리스트링.get("id");
-      })
     </script>
   </body>
 </html>
